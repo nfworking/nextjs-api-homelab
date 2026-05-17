@@ -1,7 +1,13 @@
 async function getData() {
+  const token = process.env.PROXMOX_API_TOKEN;
+
+  if (!token) {
+    throw new Error("Missing PROXMOX_API_TOKEN environment variable");
+  }
+
   const res = await fetch("https://ao2.fortmont.me/api2/json/nodes/", {
     headers: {
-      "Authorization": "PVEAPIToken=root@pam!postman=9e06c53b-4f90-4b46-9dbe-173bac7ac5bd"
+      "Authorization": token
     }
   });
 
